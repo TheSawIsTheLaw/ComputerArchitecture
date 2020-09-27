@@ -74,6 +74,27 @@ function task3()
     }
 }
 
+function searchTxtFiles(way)
+{
+    let files = fs.readdirSync(way);
+    for (let fileName of files)
+    {
+        if (fileName.endsWith(".txt") && fs.readFileSync(way + fileName).length <= 10)
+            console.log(way + fileName);
+        else if (fs.lstatSync(way + fileName).isDirectory())
+            searchTxtFiles(way + fileName + '/');
+    }
+}
+
+function task4()
+{
+    let wayToFile = readlineSync.question("Insert way to file: ");
+    if (!wayToFile.endsWith("/"))
+        wayToFile += "/"
+    
+    searchTxtFiles(wayToFile);
+}
+
 function main()
 {
     console.log("Task 1:");
@@ -84,6 +105,9 @@ function main()
 
     console.log("\n\nTask 3:");
     task3();
+
+    console.log("\n\nTask 4:");
+    task4();
 }
 
 const readlineSync = require('readline-sync');
