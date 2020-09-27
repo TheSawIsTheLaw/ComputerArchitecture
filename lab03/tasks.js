@@ -135,6 +135,51 @@ function task6()
     }
 }
 
+let maxDepth = 0;
+let maxWay = "";
+let maxValue;
+
+function recursiveMaxBranchFinder(obj, curDepth, curWay)
+{   
+    if (typeof(obj) !== "object")
+    {
+        if (curDepth > maxDepth)
+        {
+            maxDepth = curDepth;
+            maxWay = curWay;
+            maxValue = obj;
+        }
+            
+    }
+    else
+    {
+        curDepth++;
+        for (let i in obj)
+            recursiveMaxBranchFinder(obj[i], curDepth, curWay + "->" + i);
+    }
+}
+
+function task7()
+{
+    let fileName = readlineSync.question("Insert file name: ");
+
+    if (!fs.existsSync(fileName))
+    {
+        console.log("File doesn't exist. :(");
+        return;
+    }
+
+    if (!fileName.endsWith(".json"))
+    {
+        console.log("File is not a .json file :(");
+        return;
+    }
+
+    let gotObject = JSON.parse(fs.readFileSync(fileName));
+    recursiveMaxBranchFinder(gotObject, 0, "root");
+    console.log("Max Depth:", maxDepth, "\nWay:", maxWay, "\nValue:", maxValue);
+}
+
 function main()
 {
     // console.log("Task 1:");
@@ -152,8 +197,11 @@ function main()
     // console.log("\n\nTask 5:");
     // task5();
 
-    console.log("\n\nTask 6:");
-    task6();
+    // console.log("\n\nTask 6:");
+    // task6();
+
+    console.log("\n\nTask 7:");
+    task7();
 }
 
 const readlineSync = require('readline-sync');
