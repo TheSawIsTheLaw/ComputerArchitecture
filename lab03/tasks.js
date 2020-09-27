@@ -46,6 +46,34 @@ function task2()
     console.log("...And that's all.");
 }
 
+function readFileToLog(name)
+{
+    if (!fs.existsSync(name))
+    {
+        console.log("Hmmm... File doesn't exist.");
+        return;
+    }
+
+    console.log("Reading file", name);
+
+    let outString = fs.readFileSync(name, "utf-8");
+    console.log(outString);
+}
+
+function task3()
+{
+    let extension = readlineSync.question("Insert extension in format '.txt'(.extension): ");
+    let wayToFile = readlineSync.question("Insert way to file: ");
+
+    let gotFileNames = fs.readdirSync(wayToFile);
+    
+    for (let name of gotFileNames)
+    {
+        if (name.endsWith(extension))
+            readFileToLog(name);
+    }
+}
+
 function main()
 {
     console.log("Task 1:");
@@ -53,6 +81,9 @@ function main()
 
     console.log("\n\nTask 2:");
     task2();
+
+    console.log("\n\nTask 3:");
+    task3();
 }
 
 const readlineSync = require('readline-sync');
