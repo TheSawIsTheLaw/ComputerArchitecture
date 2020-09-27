@@ -55,16 +55,16 @@ class studentsData
 
     getAverageProgMarks(studCardNum)
     {
-        if (this.studentsList.length() === 0)
+        if (this.studentsList.length === 0)
             return;
-        let student = this.studentsList.read(studCardNum);
-        if (student === undefined || student.progMarks.length() === 0)
+        let student = this.read(studCardNum);
+        if (student === undefined || student.progMarks.length === 0)
             return;
         let summary = 0;
-        for (let i = 0; i < student.progMarks.length(); i++)
+        for (let i = 0; i < student.progMarks.length; i++)
             summary += student.progMarks[i];
 
-        return summary / student.progMarks.length();
+        return summary / student.progMarks.length;
     }
 
     getStudentsByGroup(group)
@@ -79,8 +79,8 @@ class studentsData
             return;
 
         let retStud = students[0];
-        for (let i = 1; i < students.length(); i++)
-            if (students[i].progMarks.length() > retStud.progMarks.length())
+        for (let i = 1; i < students.length; i++)
+            if (students[i].progMarks.length > retStud.progMarks.length)
                 retStud = students[i];
 
         return retStud;
@@ -88,7 +88,7 @@ class studentsData
 
     getStudentsWithNoMarks()
     {
-        return this.studentsList.filter(student => student.marks.length() === 0);
+        return this.studentsList.filter(student => student.progMarks.length === 0);
     }
 };
 
@@ -134,6 +134,19 @@ function main()
     students.upd(113, "G1", [2]);
     console.log("After:", students.read(113));
 
+    // average marks tests
+    console.log("\nAverage in marks for 122", students.read(122), "AVERAGE: ", students.getAverageProgMarks(122));
+    console.log("\nAverage in marks for 111", students.read(111), "AVERAGE: ", students.getAverageProgMarks(111));
+
+    // students in group tests
+    console.log("\nStudents of goups: ", students.getStudentsByGroup("G1"), students.getStudentsByGroup("G2"));
+
+    // Mostly marked tests
+    console.log("\nMost marked student of group G1:", students.getMarkedStudentByGroup("G1"));
+    console.log("\nMost marked student of group G2:", students.getMarkedStudentByGroup("G2"));
+
+    // No marks tests
+    console.log("\nStudents with no marks:", students.getStudentsWithNoMarks());
 }
 
 main();
