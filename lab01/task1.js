@@ -79,8 +79,8 @@ class KidsData
 
     getKidsInfoLastnStartsWithVowel()
     {
-        let vowelList = ['A', 'E', 'I', 'O', 'U'];
-        return this.kidsList.filter(curKid => vowelList.find(vowel => vowel === curKid.lastName[0]));
+        let vowelList = ['a', 'e', 'i', 'o', 'u'];
+        return this.kidsList.filter(curKid => vowelList.find(vowel => vowel === curKid.lastName.toLowerCase()[0]));
     }
 };
 
