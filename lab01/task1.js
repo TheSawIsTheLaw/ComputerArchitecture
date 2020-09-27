@@ -36,7 +36,6 @@ class kidsData
         this.kidsList = this.kidsList.filter(curKid => curKid.lastName != delLastName);
     }
 
-    // Получение среднего возраста всех детей
     getAverAge()
     {
         if (this.kidsList.length == 0)
@@ -48,7 +47,6 @@ class kidsData
         return summary / this.kidsList.length;
     }
 
-    // Получение информации о самом "старом" ребёнке
     getOlderKidInfo()
     {
         if (this.kidsList.length == 0)
@@ -62,7 +60,6 @@ class kidsData
         return olderKid.age;
     }
 
-    // Получение информации  детях, возраст которых входит в заданный отрезок
     getKidsInfoByAgeSegment(start, end)
     {
         if (this.kidsList.length == 0)
@@ -70,19 +67,16 @@ class kidsData
         return this.kidsList.filter(curKid => start <= curKid.age && curKid.age <= end);
     }
 
-    // Получение информации о детях, фамилия которых начинается с заданной буквы
     getKidsInfoByFirstLetter(letter)
     {
             return this.kidsList.filter(curKid => curKid.lastName[0] === letter);
     }
 
-    // Получение информации о детях, фамилия которых длиннее заданного количества символов
     getKidsInfoWithLongerLastThan(numOfLetters)
     {
         return this.kidsList.filter(curKid => curKid.lastName.length > numOfLetters);
     }
 
-    // Получение информации о детях, фамилия которых начинается с глаcной буквы
     getKidsInfoLastnStartsWithVowel()
     {
         let vowelList = ['A', 'E', 'I', 'O', 'U'];
