@@ -95,19 +95,39 @@ function task4()
     searchTxtFiles(wayToFile);
 }
 
+function task5()
+{
+    let numOfNames = readlineSync.questionInt("Number of names (text files): ");
+
+    let names = [];
+    for (let i = 0; i < numOfNames; i++)
+        names.push(readlineSync.question("Name: "));
+
+    let outStringFromFiles = "";
+    for (let name of names)
+    {
+        if (fs.existsSync(name))
+            outStringFromFiles += fs.readFileSync(name, "utf-8");
+    }
+    fs.writeFileSync("outTask5.txt", outStringFromFiles);
+}
+
 function main()
 {
-    console.log("Task 1:");
-    task1();
+    // console.log("Task 1:");
+    // task1();
 
-    console.log("\n\nTask 2:");
-    task2();
+    // console.log("\n\nTask 2:");
+    // task2();
 
-    console.log("\n\nTask 3:");
-    task3();
+    // console.log("\n\nTask 3:");
+    // task3();
 
-    console.log("\n\nTask 4:");
-    task4();
+    // console.log("\n\nTask 4:");
+    // task4();
+
+    console.log("\n\nTask 5:");
+    task5();
 }
 
 const readlineSync = require('readline-sync');
