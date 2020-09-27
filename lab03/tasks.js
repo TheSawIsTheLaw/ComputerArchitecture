@@ -112,6 +112,29 @@ function task5()
     fs.writeFileSync("outTask5.txt", outStringFromFiles);
 }
 
+function task6()
+{
+    let obj = 666;
+    let counter = 0;
+    try
+    {
+        while (true) // Господи и Сатана, простите мою душу грешную
+        {
+            counter++;
+            obj = {obj};
+            JSON.stringify(obj);
+        }
+        // for (let i = 0; i < 5706; i++)
+        //     obj = { obj };
+        // JSON.stringify(obj); // Проверка. Реально падает...
+    }
+    catch(err)
+    {
+        console.log("Error: ", err);
+        console.log("Ladies and gentlemen we got him! ", counter);
+    }
+}
+
 function main()
 {
     // console.log("Task 1:");
@@ -126,8 +149,11 @@ function main()
     // console.log("\n\nTask 4:");
     // task4();
 
-    console.log("\n\nTask 5:");
-    task5();
+    // console.log("\n\nTask 5:");
+    // task5();
+
+    console.log("\n\nTask 6:");
+    task6();
 }
 
 const readlineSync = require('readline-sync');
