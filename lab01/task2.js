@@ -1,6 +1,6 @@
 "use strict";
 
-class studentsData
+class StudentsData
 {
     constructor()
     {
@@ -94,7 +94,7 @@ class studentsData
 
 function main()
 {
-    let students = new studentsData();
+    let students = new StudentsData();
 
     students.add("G1", 111, [2, 2, 2]);
     students.add("G1", 112, [2, 5, 3, 5]);

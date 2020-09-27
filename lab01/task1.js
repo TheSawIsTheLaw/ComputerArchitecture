@@ -1,6 +1,6 @@
 "use strict";
 
-class kidsData
+class KidsData
 {
     constructor()
     {
@@ -86,7 +86,7 @@ class kidsData
 
 function main()
 {
-    let testKids = new kidsData();
+    let testKids = new KidsData();
     
     // add tests
     testKids.add("Stalin", 13);

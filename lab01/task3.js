@@ -1,6 +1,6 @@
 "use strict";
 
-class dotsData
+class DotsData
 {
     constructor()
     {
@@ -117,4 +117,10 @@ class dotsData
         return this.dotsList.filter(dot => dot.xPos <= maxX && dot.yPos <= maxY && dot.xPos >= minX && dot.yPos >= minY);
     }
 };
- 
+
+function main()
+{
+    let dots = new DotsData();
+}
+
+main(); 
