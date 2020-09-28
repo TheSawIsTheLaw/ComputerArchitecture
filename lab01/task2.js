@@ -21,27 +21,27 @@ class StudentsData
 
     read(studCardNum)
     {
-        return this.studentsList.find(student => student.studCardNum === studCardNum);
+        return this.studentsList.find(student => student.studCardNum === studCardNum) || null;
     }
 
     updGroup(studCardNum, group)
     {
         let updateStudent = this.read(studCardNum);
-        if (updateStudent != null)
+        if (updateStudent !== null)
             updateStudent.group = group;
     }
 
     updProgMarks(studCardNum, marks)
     {
         let updateStudent = this.read(studCardNum);
-        if (updateStudent != null)
+        if (updateStudent !== null)
             updateStudent.progMarks = marks;
     }
 
     upd(studCardNum, group, marks)
     {
         let updateStudent = this.read(studCardNum);
-        if (updateStudent != null)
+        if (updateStudent !== null)
         {
             updateStudent.group = group;
             updateStudent.progMarks = marks;
@@ -50,15 +50,16 @@ class StudentsData
 
     del(delStudCardNum)
     {
-        this.studentsList = this.studentsList.filter(curStudent => curStudent.studCardNum != delStudCardNum);
+        this.studentsList = this.studentsList.filter(curStudent => curStudent.studCardNum !== delStudCardNum);
     }
 
+    // Получение средней оценки заданного студента
     getAverageProgMarks(studCardNum)
     {
         if (this.studentsList.length === 0)
             return;
         let student = this.read(studCardNum);
-        if (student === undefined || student.progMarks.length === 0)
+        if (student === null || student.progMarks.length === 0)
             return;
         let summary = 0;
         for (let i = 0; i < student.progMarks.length; i++)
@@ -67,11 +68,13 @@ class StudentsData
         return summary / student.progMarks.length;
     }
 
+    // Получение информации о студентах в заданной группе
     getStudentsByGroup(group)
     {
         return this.studentsList.filter(student => student.group === group);
     }
 
+    // Получение студента, у которого наибольшее количество оценок в заданной группе
     getMarkedStudentByGroup(group)
     {
         let students = this.getStudentsByGroup(group);
@@ -86,6 +89,7 @@ class StudentsData
         return retStud;
     }
 
+    // Получение студента, у которого нет оценок
     getStudentsWithNoMarks()
     {
         return this.studentsList.filter(student => student.progMarks.length === 0);

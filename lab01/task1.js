@@ -21,13 +21,13 @@ class KidsData
 
     read(lastName)
     {
-        return this.kidsList.find(kid => kid.lastName === lastName);
+        return this.kidsList.find(kid => kid.lastName === lastName) || null;
     }
 
     upd(lastName, age)
     {
         let updateKid = this.read(lastName);
-        if (updateKid != null)
+        if (updateKid !== null)
             updateKid.age = age;
     }
 
@@ -36,9 +36,10 @@ class KidsData
         this.kidsList = this.kidsList.filter(curKid => curKid.lastName != delLastName);
     }
 
+    // Получение среднего возраста детей``
     getAverAge()
     {
-        if (this.kidsList.length == 0)
+        if (this.kidsList.length === 0)
             return;
         let summary = 0;
         for (let i = 0; i < this.kidsList.length; i++)
@@ -47,11 +48,12 @@ class KidsData
         return summary / this.kidsList.length;
     }
 
+    // Получение информации о самом старшем ребенке
     getOlderKidInfo()
     {
-        if (this.kidsList.length == 0)
+        if (this.kidsList.length === 0)
             return;
-        if (this.kidsList.length == 1)
+        if (this.kidsList.length === 1)
             return this.kidsList[0].age;
         let olderKid = this.kidsList[0];
         for (let i = 1; i < this.kidsList.length; i++)
@@ -60,23 +62,27 @@ class KidsData
         return olderKid.age;
     }
 
+    // Получение информации о детях, возраст которых входит в заданный отрезок
     getKidsInfoByAgeSegment(start, end)
     {
-        if (this.kidsList.length == 0)
+        if (this.kidsList.length === 0)
             return;
         return this.kidsList.filter(curKid => start <= curKid.age && curKid.age <= end);
     }
 
+    // Получение информации о детях, фамилия которых начинается с заданной буквы
     getKidsInfoByFirstLetter(letter)
     {
             return this.kidsList.filter(curKid => curKid.lastName[0] === letter);
     }
 
+    // Получение информации о детях, фамилия которых длиннее заданного количества символов
     getKidsInfoWithLongerLastThan(numOfLetters)
     {
         return this.kidsList.filter(curKid => curKid.lastName.length > numOfLetters);
     }
 
+    // Получение информации о детях, фамилия которых начинается с гласной буквы
     getKidsInfoLastnStartsWithVowel()
     {
         let vowelList = ['a', 'e', 'i', 'o', 'u'];

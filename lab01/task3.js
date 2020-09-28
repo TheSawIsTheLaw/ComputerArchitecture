@@ -21,27 +21,27 @@ class DotsData
 
     read(name)
     {
-        return this.dotsList.find(dot => dot.name === name);
+        return this.dotsList.find(dot => dot.name === name) || null;
     }
 
     updX(name, newXPos)
     {
         let updDot = this.read(name);
-        if (updDot != null)
+        if (updDot !== null)
             updDot.xPos = newXPos;
     }
 
     updY(name, newYPos)
     {
        let updDot = this.read(name);
-       if (updDot != null)
+       if (updDot !== null)
            updDot.yPos = newYPos;
    }
 
     upd(name, newXPos, newYPos)
     {
         let updDot = this.read(name);
-        if (updDot != null)
+        if (updDot !== null)
        {
            updDot.xPos = newXPos;
            updDot.yPos = newYPos;
@@ -50,7 +50,7 @@ class DotsData
 
     del(delName)
     {
-        this.dotsList = this.dotsList.filter(dot => dot.name != delName);
+        this.dotsList = this.dotsList.filter(dot => dot.name !== delName);
     }
 
     getDistance(fDotName, sDotName)
@@ -66,6 +66,7 @@ class DotsData
         return Math.sqrt(xInc * xInc + yInc * yInc);
     }
 
+    // Получение двух точек, между которыми наибольшее расстояние
     getMostDistantDots()
     {
         if (this.dotsList.length < 2)
@@ -86,11 +87,13 @@ class DotsData
         return maxDistDots;
     }
 
+    // Получение точек, находящихся от заданной точки на расстоянии, не превышающем заданную константу
     getDotsOnDistanceFromDot(mainDotName, distance)
     {
         return this.dotsList.filter(dot => this.getDistance(mainDotName, dot.name) && this.getDistance(mainDotName, dot.name) <= distance)
     }
 
+    // Получение точек, находящихся выше / ниже / правее / левее заданной оси координат
     getDotsInCoordinateQuarter(axis, position)
     {
         let filterfunc;
@@ -113,6 +116,7 @@ class DotsData
         return this.dotsList.filter(filterfunc);
     }
 
+    // Получение точек, входящих внутрь заданной прямоугольной зоны
     getDotsInSquare(maxX, maxY, minX, minY)
     {
         return this.dotsList.filter(dot => dot.xPos <= maxX && dot.yPos <= maxY && dot.xPos >= minX && dot.yPos >= minY);
