@@ -160,7 +160,8 @@ function recursiveMaxBranchFinder(obj, curDepth, curWay)
 }
 
 function task7()
-{
+{log("\n\nTask 6:");
+task6();
     let fileName = readlineSync.question("Insert file name: ");
 
     if (!fs.existsSync(fileName))

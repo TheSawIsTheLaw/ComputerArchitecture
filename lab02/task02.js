@@ -27,7 +27,7 @@ class Triangle
     isPossible()
     {
         let {fSide, sSide, tSide} = this.get();
-        return fSide < sSide + tSide && sSide < fSide + tSide && tSide < fSide + sSide;
+        return fSide < sSide + tSide && sSide < fSide + tSide && tSide < fSide + sSide && fSide && sSide && tSide;
     }
 
     getPerimeter()
