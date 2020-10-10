@@ -33,10 +33,10 @@ app.get("/BlackTongue", function(request, response)
         response.end("Index is negative. But must be a positive. What?..")
         return;
     }
-    let arr = JSON.parse(fs.readFileSync("BlackTongue.json")); // Дело в том, что при 10 мы показываем свойста массива. Надо убирать...
-    if (arr.length <= strNumInt)
+    let arr = JSON.parse(fs.readFileSync("BlackTongue.json"));
+    if (strNumInt >= arr.length - 1)
     {
-        response.end("We are out of index. Max is " + arr.length - 1);
+        response.end("We are out of index. Max is " + (arr.length - 1).toString());
         return;
     }        
     response.end(JSON.stringify(arr[strNumInt]));
