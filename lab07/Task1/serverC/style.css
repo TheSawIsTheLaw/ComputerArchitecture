@@ -1,0 +1,19 @@
+body {
+    padding: 60px;
+    background: rgb(0, 255, 234);
+    font-family: sans-serif;
+}
+
+.button {
+    padding: 10px;
+    background: rgb(0, 255, 136);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.inp {
+    padding: 13px;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}

@@ -1,6 +1,6 @@
 "use strict";
 
-const fileName = "stocks.JSON";
+const fileName = "stocks.json";
 
 // импорт библиотеки
 const express = require("express");
@@ -39,7 +39,7 @@ app.post("/insert/record", function(request, response) {
         const stockName = obj.stockName;
         const cars = obj.cars;
         
-        if (!fs.existsSync(name))
+        if (!fs.existsSync(fileName))
         {
             response.end(JSON.stringify({
                 result: "Fail! Data file is not inited." 
@@ -48,17 +48,15 @@ app.post("/insert/record", function(request, response) {
         }
 
         let gotJSON = fs.readFileSync(fileName, "utf-8");
-        gotJSON = JSON.parse(gotJSON);
         
         try {
-            gotJSON.push({stockName: stockName, cars: cars});
+            gotJSON = JSON.parse(gotJSON);
         } catch (error) {
-            let temp = [];
-            if (gotJSON)
-                temp.push(gotJSON);
-            temp.push({stockName: stockName, cars: cars});
-            gotJSON = temp;
+            gotJSON = [];
         }
+        
+        gotJSON.push({stockName: stockName, cars: cars});
+
         gotJSON = JSON.stringify(gotJSON);
         fs.writeFileSync(fileName, gotJSON);
         response.end(JSON.stringify({
@@ -70,9 +68,9 @@ app.post("/insert/record", function(request, response) {
 app.post("/select/record", function(request, response) {
     loadBody(request, function(body) {
         const obj = JSON.parse(body);
-        const carName = obj.stockName;
+        const stockName = obj.stockName;
 
-        if (!fs.existsSync(name))
+        if (!fs.existsSync(fileName))
         {
             response.end(JSON.stringify({
                 result: "Fail! Data file is not inited." 
@@ -83,9 +81,9 @@ app.post("/select/record", function(request, response) {
         let gotJSON = fs.readFileSync(fileName, "utf-8");
         gotJSON = JSON.parse(gotJSON);
         
-        let cars = [];
+        let cars = null;
         
-        for (let i = 0; i < gotJSON.length() && price < 0; i += 2)
+        for (let i = 0; i < gotJSON.length && !cars; i++)
             if (gotJSON[i].stockName === stockName)
                 cars = gotJSON[i].cars;
 

@@ -1,6 +1,6 @@
 "use strict";
 
-const fileName = "cars.JSON";
+const fileName = "cars.json";
 
 // импорт библиотеки
 const express = require("express");
@@ -39,7 +39,7 @@ app.post("/insert/record", function(request, response) {
         const carName = obj.carName;
         const price = obj.price;
         
-        if (!fs.existsSync(name))
+        if (!fs.existsSync(fileName))
         {
             response.end(JSON.stringify({
                 result: "Fail! Data file is not inited." 
@@ -48,16 +48,15 @@ app.post("/insert/record", function(request, response) {
         }
 
         let gotJSON = fs.readFileSync(fileName, "utf-8");
-        gotJSON = JSON.parse(gotJSON);
         
         try {
-            gotJSON.push({carName: carName, price: price});
+            gotJSON = JSON.parse(gotJSON);
         } catch (error) {
-            let temp = [];
-            temp.push(gotJSON);
-            temp.push({carName: carName, price: price});
-            gotJSON = temp;
+            gotJSON = [];
         }
+        
+        gotJSON.push({carName: carName, price: price});
+
         gotJSON = JSON.stringify(gotJSON);
         fs.writeFileSync(fileName, gotJSON);
         response.end(JSON.stringify({
@@ -71,7 +70,7 @@ app.post("/select/record", function(request, response) {
         const obj = JSON.parse(body);
         const carName = obj.carName;
 
-        if (!fs.existsSync(name))
+        if (!fs.existsSync(fileName))
         {
             response.end(JSON.stringify({
                 result: "Fail! Data file is not inited." 
@@ -84,13 +83,17 @@ app.post("/select/record", function(request, response) {
         
         let carPrice = -1;
         
-        for (let i = 0; i < gotJSON.length() && price < 0; i += 2)
+        for (let i = 0; i < gotJSON.length && carPrice < 0; i++)
             if (gotJSON[i].carName === carName)
                 carPrice = gotJSON[i].price;
 
-        
-        response.end(JSON.stringify({
-                result: "Found your car! It's " + carName + ' ' + price + '$' 
+        if (carPrice >= 0)
+            response.end(JSON.stringify({
+                result: "Found your car! It's " + carName + ' ' + carPrice + '$' 
+            }));
+        else
+            response.end(JSON.stringify({
+                result: "No car with name " + carName 
             }));
     });
 });

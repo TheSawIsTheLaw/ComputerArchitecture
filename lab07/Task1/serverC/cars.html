@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Я ОЧЕНЬ ХОЧУ УМЕРЕТЬ</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Создание нового типа машины</h1>
+
+    <p>Тип новой машины:</p>
+    <input class="inp" id="carNameIns" type="text" spellcheck="false" autocomplete="off">
+
+    <p>Стоимость новой машины:</p>
+    <input class="inp" id="priceIns" type="text" spellcheck="false" autocomplete="off">
+
+    <br>
+    <br>
+    <button class="button" onclick="addCar()">Отправить данные о машине!</button>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1>Получение информации о стоимости машины по её типу</h1>
+
+    <p>Тип машины:</p>
+    <input class="inp" id="carNameGet" type="text" spellcheck="false" autocomplete="off">
+
+    <br>
+    <br>
+    <button class="button" onclick="getCar()">Получить данные о машине!</button>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1>Создание нового склада машин</h1>
+
+    <p>Название склада:</p>
+    <input class="inp" id="stockNameIns" type="text" spellcheck="false" autocomplete="off">
+
+    <p>Машины на складе (через пробел):</p>
+    <input class="inp" id="carsIns" type="text" spellcheck="false" autocomplete="off">
+
+    <br>
+    <br>
+    <button class="button" onclick="addStock()">Отправить данные о складе!</button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1>Получение информации о складе машин</h1>
+
+    <p>Название склада:</p>
+    <input class="inp" id="stockNameGet" type="text" spellcheck="false" autocomplete="off">
+
+    <br>
+    <br>
+    <button class="button" onclick="getStock()">Получить данные о складе!</button>
+
+
+    <h1 id="result-label"></h1>
+
+    <script src="/code.js"></script>
+</body>
+</html>
