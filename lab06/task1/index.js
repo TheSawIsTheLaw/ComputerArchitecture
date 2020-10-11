@@ -29,6 +29,7 @@ app.use(function(req, res, next) {
 });
 
 // выдача страницы с информацией о кафедре
+// http://localhost:5000/page/games?age=16
 app.get("/page/games", function(request, response) {
     let out = [];
     for (let game of gamesArr)
