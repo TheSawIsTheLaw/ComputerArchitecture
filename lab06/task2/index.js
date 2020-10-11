@@ -3,7 +3,7 @@
  let users = [
      {login: "Hitler", password: "1945", hobby: "Suicide", age: 56},
      {login: "Stalin", password: "1941", hobby: "Repression", age: 74},
-     {login: "Mussolini", password: "Mama Mia, Pepperoni!", hobby: "Pizza", age: 61}
+     {login: "Mussolini", password: "MamaMia,Pepperoni!", hobby: "Pizza", age: 61}
  ];
 
 const express = require("express");
@@ -19,7 +19,7 @@ console.log(`Server on port ${port}`);
 app.use(cookieSession({
     name: 'session',
     keys: ['hhh', 'qqq', 'vvv'],
-    maxAge: 24 * 60 * 60 * 1000 * 365
+    maxAge: 300 * 1000 // Сколько живёт, в нашем случае 5 минут
 }));
 
 // заголовки в ответ клиенту
@@ -43,10 +43,7 @@ app.get("/login", function(request, response) {
     let index = 0;
     for (let i = 0; i < users.length && !found; i++)
         if (users[i].login === login && users[i].password === password)
-        {
             found = true;
-            index = i;
-        }
         
     if (!found)
     {
@@ -55,8 +52,6 @@ app.get("/login", function(request, response) {
     }
     request.session.login = login;
     request.session.password = password;
-    request.session.hobby = users[index].hobby;
-    request.session.age = users[index].age;
     // отправляем ответ об успехе операции
     response.end("Authorized!");
 });
@@ -66,12 +61,19 @@ app.get("/login", function(request, response) {
 app.get("/auth", function(request, response) {
     // контролируем существование cookie
     console.log(request.session.hobby, request.session.age);
-    if(!request.session.login || !request.session.password) return response.end("No coockies of auth!");
+    if(!request.session.login || !request.session.password) return response.end("No cookies of auth!");
     // отправляем ответ с содержимым cookie
     const login = request.session.login;
     const password = request.session.password;
-    const hobby = request.session.hobby;
-    const age = request.session.age;
+    let hobby = "";
+    let age = 0;
+    let found = false;
+    for (let i = 0; i < users.length && !found; i++)
+        if (users[i].login === login && users[i].password === password)
+        {
+            hobby = users[i].hobby;
+            age = users[i].age;
+        }
 
     const infoObject = {
         login: login,
@@ -85,5 +87,5 @@ app.get("/auth", function(request, response) {
 // удалить все cookie
 app.get("/delCookies", function(request, response) {
     request.session = null;
-    response.end("Cockies are deleted");
+    response.end("Cookies are deleted");
 });
