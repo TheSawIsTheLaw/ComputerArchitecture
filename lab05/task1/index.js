@@ -33,7 +33,6 @@ function getInfo(mail)
     readContents = readContents.split(/\n| /);
     let index = readContents.indexOf(mail);
     let out = "";
-    console.log(readContents);
     if (index >= 0)
         out += readContents[index] + ' ' + readContents[index + 1] + ' ' + readContents[index + 2];
     else
@@ -42,9 +41,9 @@ function getInfo(mail)
 }
 
 // http://localhost:5000/getUser.html
-app.get("/getInfo", function(request, response) {
+app.get("/getInfo", function(request, response) 
+{
     const mail = request.query.mail;
-    console.log(mail);
 
     let out = getInfo(mail);
     response.end(JSON.stringify({
