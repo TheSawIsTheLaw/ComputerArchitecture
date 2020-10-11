@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Страница</title>
+</head>
+<body>
+    
+<h1>Страница</h1>
+
+<button onclick="getRecord()">Отправить запрос</button>
+
+<script>
+    "use strict";
+
+    // ajax get
+    function ajaxGet(urlString, callback) {
+        let r = new XMLHttpRequest();
+        r.open("GET", urlString, true);
+        r.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+        r.send(null);
+        r.onload = function() {
+            callback(r.response);
+        };
+    };
+
+    // ввод ключа и отправка запроса на сервер
+    function getRecord() {
+        // ввод строки и валидация
+        const input = prompt("Введите ключ", "");
+        if(!input) return;
+        if(!input.trim()) return;
+
+        // формирование url
+        const a = input.trim();
+        console.log(a);
+        const b = encodeURIComponent(a);
+        console.log(b);
+        const url = `/record?k=${b}`;
+        console.log(url);
+
+        // отправка запроса на сервер
+        ajaxGet(url, function(answerString) {
+            const answerObject = JSON.parse(answerString);
+            const message = `Ключ: ${answerObject.k}` + "\n" + `Значение: ${answerObject.v}`;
+            alert(message);
+        });
+    }
+</script>
+
+</body>
+</html>
