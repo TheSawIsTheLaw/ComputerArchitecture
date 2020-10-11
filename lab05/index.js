@@ -1,5 +1,4 @@
 "use strict";
-"use strict";
 
 // импортируем необходимые библиотеки
 const express = require("express");
