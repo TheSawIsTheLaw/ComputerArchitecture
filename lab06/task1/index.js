@@ -1,7 +1,7 @@
 "use strict"; 
 
 let gamesArr = [{name: "Dota", descr: "Gladly IceFrog", age: 16},
-                {name: "Dota2", descr: "Shitty place", age: 16},
+                {name: "Dota2", descr: "Place", age: 16},
                 {name: "Furry Tales", descr: "UWU", age: 8},
                 {name: "Zabiv", descr: "Hmm, smth wrong", age: 21},
                 {name: "SuperSsunek", descr: "Sonic goes brrrrrrr", age: 0}
