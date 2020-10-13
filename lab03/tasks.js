@@ -118,15 +118,12 @@ function task6()
     let counter = 0;
     try
     {
-        while (true) // Господи и Сатана, простите мою душу грешную
+        while (true)
         {
             counter++;
             obj = {obj};
             JSON.stringify(obj);
         }
-        // for (let i = 0; i < 5706; i++)
-        //     obj = { obj };
-        // JSON.stringify(obj); // Проверка. Реально падает...
     }
     catch(err)
     {
@@ -160,8 +157,7 @@ function recursiveMaxBranchFinder(obj, curDepth, curWay)
 }
 
 function task7()
-{log("\n\nTask 6:");
-task6();
+{
     let fileName = readlineSync.question("Insert file name: ");
 
     if (!fs.existsSync(fileName))
@@ -183,23 +179,23 @@ task6();
 
 function main()
 {
-    // console.log("Task 1:");
-    // task1();
+    console.log("Task 1:");
+    task1();
 
-    // console.log("\n\nTask 2:");
-    // task2();
+    console.log("\n\nTask 2:");
+    task2();
 
-    // console.log("\n\nTask 3:");
-    // task3();
+    console.log("\n\nTask 3:");
+    task3();
 
-    // console.log("\n\nTask 4:");
-    // task4();
+    console.log("\n\nTask 4:");
+    task4();
 
-    // console.log("\n\nTask 5:");
-    // task5();
+    console.log("\n\nTask 5:");
+    task5();
 
-    // console.log("\n\nTask 6:");
-    // task6();
+    console.log("\n\nTask 6:");
+    task6();
 
     console.log("\n\nTask 7:");
     task7();

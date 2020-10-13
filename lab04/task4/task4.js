@@ -7,6 +7,8 @@ const port = 5015;
 app.listen(port);
 console.log("My server on port " + port);
 
+app.use(express.static(__dirname));
+
 const fs = require("fs");
 
 app.get("/", function(request, response) 
